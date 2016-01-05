@@ -1,0 +1,45 @@
+<p>{{like}}</p>
+{% if messages %}
+ {% for message in messages %}
+ <p {% if message.tags %} class={{message.tags}} {% endif %}>{{message}}</p>
+ {% endfor %}
+{% endif %}
+<!doctype html>
+{% load staticfiles %}
+<html>
+<head>
+<title>球類運動</title>
+<p>{{message}}</p>
+<meta charset=utf-8>
+<link rel=stylesheet href={% static 'main/css/main.css' %}>
+</head>
+<body>
+<h1>歡迎瀏覽球類運動介紹，走過路過千萬不要錯過！</h1>
+<a href={% url 'init:init' %}><h2>籃球</h2>
+<img src={% static 'main/img/籃球.jpg' %} alt=籃球>
+</a>
+<p><div class='inf'>
+<p>起源於：1891年</p>
+<p>創始人：詹姆士·奈史密斯</p>
+<p>命名：當時投擲以裝桃的籃子為目標，所以取名為籃球</p>
+<p>最開始的籃球運動所使用的球是足球，直至1950年代晚期，湯尼·辛科爾才引進了該項運動專用的褐色籃球。最初籃球比賽上場人數、場地大小、比賽時間均無嚴格限制，只要人數相等就可比賽。1932年瑞士日內瓦召開第一次國際籃球會議，同年在羅馬成立了國際業餘籃球總會。1948年國際籃總決定從1950年開始每四年舉行一次世界籃球錦標賽，在2012年宣布更名為男子世界盃籃球賽。</p>
+</div></p>
+<a href={% url 'baseball:baseball' %}><h2>棒球</h2>
+<img src={% static 'main/img/棒球.jpg' %} alt=棒球><br>
+</a>
+
+
+<p><div class='inf'>
+<p>起源於：1839年</p>
+<p>創始人：官達博岱</p>
+<p>命名：不詳</p>
+<p>1845年，亞歷山大·卡特來特（Alexander Cartwright）出版了一部運動書，說明了其詳細規則，相信是棒球最早的正式規則，而這份文件所記載的規則，已經符合大部份現代人對棒球的印象。1846年，第一場有正式紀錄的棒球比賽出現：紐約Knickerbockers對紐約九人（New York Nine）；比賽地點是紐澤西的Elysian球場。1865年南北戰爭結束後，南方的美國人有機會接觸棒球，棒球在美國流傳更廣泛。1869年，第一支職業球隊成立，隊名是辛辛那提紅長襪（即是現在的辛辛那提紅人隊）。美國亦有玩英式棒球，使用不同的規則，比較像板球。</p></div></p>
+</body>
+</head>
+{% if user.is_authenticated %}
+ <p><a href={% url 'account:userLogout' %}>登出 ({{user.username}})</a></p>
+{% else %}
+<p><a href={% url 'account:register' %}>註冊</a></p>
+<p><a href={% url 'account:userLogin' %}>登入</a></p>
+{% endif %}
+<embed src="http://s110.youmaker.com/other/2015/12-15/mp386410106940c0d105a1b046c7abe2ddc686799e38110.mp3" autostart="true" loop="1"  width="50" height="70" hidden="true"></embed>

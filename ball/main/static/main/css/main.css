@@ -1,0 +1,16 @@
+body {
+ background: #f2b464;
+}
+img {
+	width: 200px; 
+	height: 200px;	
+}
+inf{
+	font-size:1.5em;
+}
+.success {
+ color: blue;
+}
+.error {
+ color: red;
+}

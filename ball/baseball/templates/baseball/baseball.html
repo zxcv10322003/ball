@@ -1,0 +1,90 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+<head>
+<title>棒球</title>
+{% if categories %}
+
+{% else %}
+ 	<p><strong>目前尚未設定程式語言分類。</strong></p>
+{% endif %}
+<meta charset=utf-8>
+<link rel=stylesheet href={% static 'main/css/main.css' %}>
+</head>
+<body>
+<h1>什麼是棒球？</h1>
+<h3>棒球：</h3>是一種團體球類運動，是由人數最少為9人的兩支隊伍在一個扇形的球場進行「擊球—跑位」形式的對抗。</p>
+棒球球員分為攻、守兩方，攻方球員利用球棒將守方投擲的球擊出，隨後沿著四個壘位進行跑壘，當成功跑一圈回到本壘就可得1分；而守方則利用手套將攻方擊出的球接住或擲回將攻方球員打出局。比賽中，兩隊輪流攻守，九局中得分較高的一隊勝出。</p>
+<img src={% static 'baseball/img/wang.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/林智勝.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/殷.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/棒球場.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/接殺.jpg' %} alt=程式語言影像>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<h2>攻擊戰術</h2>
+<p>（1）短打：比分接近的時候 ㄧ壘上有跑者，就會利用犧牲短打推進跑者上二壘</p>
+<p>（2）盜壘：一壘有人，避免雙殺的話，跑者腳程快的或者抓投手節奏很厲害的跑者會下達盜二壘</p>
+<p>（3）打跑戰術：投手投球好球很多，攻擊方容易下達戰術，可以使用"打跑戰術"，投手球一投出，一壘跑者起跑，打者一定要擊到球，就形成打跑成功、如果剛好擊出安打，那跑者因提前起跑，更有機會多搶一個壘</p>
+<p>（4）高飛犧牲打：通常在二壘、三壘有人時候，外野手接到球，離你有一段距離，踩在壘包上，野手球一接到，就能起跑往下個壘包進壘</p>
+<p>（5）雙盜壘：例如一壘、三壘都有跑者，投手球投出去，一壘跑者會先起跑，經驗不足的捕手就會心急把球傳二壘，三壘跑者只要看到捕手往二壘傳球，並且確實傳出去，就會拼命的往本壘衝，成功就形成雙盜壘</p>
+<p>（6）強迫取分：投手戰的比賽，得分不易，三壘有跑者時，無人出局、或者一人出局，打者會做短打，短打下去，球彈出去的位置不錯，三壘跑者就會拼命跑向本壘得分</p>
+<p>（7）突襲短打：壘上有跑者時，投手們都認為中心棒次會強攻，這時打者的打擊姿勢是要做揮擊的，當投手球投出來，並且像個好球，打者會變成短打姿勢，偷點球，做推進</p>
+<p>（8）短打收打：壘上有跑者時，投手們都認為弱的打者比出短棒，因該就是要真的短打，於是投了紅中好球給你點，結果球投出來，打者轉變為打擊姿勢，大棒一揮攻擊正中好球，因該都有不錯的效果</p>
+<img src={% static 'baseball/img/短打.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/盜壘.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/刺殺.jpg' %} alt=程式語言影像>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<p>
+	&nbsp;</p>
+<h2>防守戰術</h2>	
+<p>（1）趨前守備：滿壘時內野防守方不想失掉任何分數，就會做出趨前防守來賭注，因為守的比較前面，接到滾地球，可以快速的傳向本壘做出封殺</p>
+<p>（2）擴大守備：內野擴大守備是因為他想穩穩抓出局數，給你多少分都無所謂了，所以守比較深，球自然不容易打出佈陣，這樣就能不讓球穿出內野，製造比較好的刺殺機會</p>
+<img src={% static 'baseball/img/守備.jpg' %} alt=程式語言影像>
+<img src={% static 'baseball/img/球.jpg' %} alt=程式語言影像>
+</body>
+	 <h2>棒球相關影片：</h2>
+ 	<table>
+ 	<tr><th></th><th></th><th></th></tr>
+ 	{% for category in categories %}
+ 	<tr>
+ 	<td>
+ 	{% if user.is_authenticated %}
+ 		<a href={% url 'baseball:category' category.id %}>{{category.name}}</a>
+	{% endif %}
+	</td>
+	<td>
+	{% if user.is_authenticated %}
+ 	 <form action={% url 'baseball:updateCategory' category.id %}>
+ 		<input type="submit" value=修改>
+ 	 </form>
+ 	 {% endif %}
+ 	</td>
+	<td>
+	{% if user.is_authenticated %}
+ 	<form method=post action={% url 'baseball:deleteCategory' category.id %}>
+ 	{% csrf_token %}
+ 	<input type=submit value=刪除>
+ 	</form>
+ 	{% endif %}
+ 	</td>
+ 	</tr>
+ 	{% endfor %}
+ 	</table>
+{% if user.is_authenticated %}
+<p><a href={% url 'baseball:addCategory' %}>新增 棒球分類</a></p>
+<p>
+	&nbsp;</p>
+{% endif %}
+<p><a href={% url 'main:main' %}>前往 主頁面</a></p>
+<p><a href={% url 'init:init' %}>前往 籃球 頁面</a></p>
+</html> 
+<iframe width=800px height=600px src=http://www.youmaker.com/video/showAFlvEmbed-b5-e72780a7c1d144b980c002dbbd05ace1110.html frameborder=0 allowfullscreen></iframe>
+<embed src="http://s110.youmaker.com/other/2015/12-15/mp36128618864add5d723d1b4ca398866cf4f9ac3291110.mp3" autostart="true" loop="1"  width="50" height="70" hidden="true"></embed>
